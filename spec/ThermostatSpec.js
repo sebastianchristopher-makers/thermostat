@@ -17,7 +17,9 @@ describe('Thermostat', function() {
     for(let i = 20; i > 10; i--) {
       thermostat.down();
     }
-    // expect(thermostat.temperature).toEqual(10);
     expect(() => {thermostat.down()}).toThrow('Thermostat is at its minimum temperature.');
+  });
+  it('power saving mode is on by default', function() {
+    expect(thermostat.powerSavingMode).toBe(true);
   })
 });
