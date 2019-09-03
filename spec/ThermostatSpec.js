@@ -21,5 +21,11 @@ describe('Thermostat', function() {
   });
   it('power saving mode is on by default', function() {
     expect(thermostat.powerSavingMode).toBe(true);
-  })
+  });
+  it('if power saving mode is on, the maximum temperature is 25', function() {
+    for(let i = 20; i < 25; i++) {
+      thermostat.up();
+    }
+    expect(() => {thermostat.up()}).toThrow('Thermostat is at its maximum temperature.');
+  });
 });
