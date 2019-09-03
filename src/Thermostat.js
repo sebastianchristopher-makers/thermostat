@@ -20,4 +20,10 @@ class Thermostat {
   maxTemp() {
     return (this.temperature === 25 && this.powerSavingMode === true) || (this.temperature === 32 && this.powerSavingMode === false);
   }
+  turnPowerSavingOff() {
+    this.powerSavingMode = false;
+  }
+  turnPowerSavingOn() {
+    this.powerSavingMode = true;
+  }
 }
