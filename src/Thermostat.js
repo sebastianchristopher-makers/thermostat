@@ -6,6 +6,10 @@ class Thermostat {
     this.temperature ++;
   }
   down() {
-    this.temperature --;
+    if(this.temperature > 10) {
+      this.temperature--;
+    } else {
+      throw 'Thermostat is at its minimum temperature.';
+    }
   }
 }
