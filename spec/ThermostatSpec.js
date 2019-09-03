@@ -46,16 +46,16 @@ describe('Thermostat', function() {
       for(let i = 20; i >= 18; i--){
         thermostat.down()
       }
-      expect(thermostat.energyUsage()).toEqual('low-usage');
+      expect(thermostat.energyUsage()).toEqual('low');
     });
     it('is medium-usage under 25', function() {
-      expect(thermostat.energyUsage()).toEqual('medium-usage');
+      expect(thermostat.energyUsage()).toEqual('medium');
     });
     it('is high-usage under 18', function() {
       for(let i = 20; i <25; i++){
         thermostat.up()
       }
-      expect(thermostat.energyUsage()).toEqual('high-usage');
+      expect(thermostat.energyUsage()).toEqual('high');
     });
   });
 });
