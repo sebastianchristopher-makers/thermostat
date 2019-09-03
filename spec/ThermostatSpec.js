@@ -34,5 +34,28 @@ describe('Thermostat', function() {
       thermostat.up();
     }
     expect(() => {thermostat.up()}).toThrow('Thermostat is at its maximum temperature.');
-  })
+  });
+  it('can reset the temperature to 20', function() {
+    thermostat.up();
+    expect(thermostat.temperature).not.toEqual(20);
+    thermostat.reset();
+    expect(thermostat.temperature).toEqual(20);
+  });
+  describe('energy usage', function() {
+    it('is low-usage under 18', function() {
+      for(let i = 20; i >= 18; i--){
+        thermostat.down()
+      }
+      expect(thermostat.energyUsage()).toEqual('low-usage');
+    });
+    it('is medium-usage under 25', function() {
+      expect(thermostat.energyUsage()).toEqual('medium-usage');
+    });
+    it('is high-usage under 18', function() {
+      for(let i = 20; i <25; i++){
+        thermostat.up()
+      }
+      expect(thermostat.energyUsage()).toEqual('high-usage');
+    });
+  });
 });
