@@ -1,7 +1,7 @@
 $(document).ready(function(){
   let thermostat = new Thermostat();
 
-  function powerSavingText() {
+  function powerSavingModeText() {
     if(thermostat.powerSavingMode === true) {
       return 'on';
     } else {
@@ -9,7 +9,7 @@ $(document).ready(function(){
     }
   }
 
-  function powerSavingText() {
+  function powerSavingCSS() {
     $('.usage').text('Current energy usage: ' + thermostat.energyUsage());
     if(thermostat.energyUsage() === 'low') {
       $('.usage').css('background', 'green');
@@ -27,29 +27,30 @@ $(document).ready(function(){
 
   $('#up').click(function(){
     thermostat.up();
-    powerSavingText();
+    powerSavingCSS();
     $('#temperature').text(thermostat.temperature);
  });
 
   $('#down').click(function(){
     thermostat.down();
-    powerSavingText();
+    powerSavingCSS();
     $('#temperature').text(thermostat.temperature);
  });
 
   $('#reset').click(function(){
-    powerSavingText();
     thermostat.reset();
+    powerSavingCSS();
     $('#temperature').text(thermostat.temperature);
  });
 
   $('#power-saving-on').click(function(){
     thermostat.turnPowerSavingOn();
-    $('#power-saving-status').text(powerSavingText());
+    $('#power-saving-status').text(powerSavingModeText());
+    $('#temperature').text(thermostat.temperature);
  });
 
   $('#power-saving-off').click(function(){
     thermostat.turnPowerSavingOff();
-    $('#power-saving-status').text(powerSavingText());
+    $('#power-saving-status').text(powerSavingModeText());
  });
 });
