@@ -1,0 +1,10 @@
+.usage {
+  display: inline-block;
+  position: absolute;
+  float: left;
+  background: black;
+  color: white;
+}
+.temperature {
+  font-size: 20px
+}

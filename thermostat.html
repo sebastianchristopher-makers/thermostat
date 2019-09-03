@@ -3,20 +3,14 @@
   <head>
     <title>Thermostat</title>
     <script src='src/thermostat.js'></script>
-    <style>
-      .usage {
-        display: inline-block;
-        position: absolute;
-        float: left;
-        background: black;
-        color: white;
-      }
-    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/style.css"></link>
   </head>
   <body>
     <section>
       <h1>Thermostat</h1>
-      <button id='up'>+</button><button id='down'>-</button><button id=reset>Reset</button><br>
+      <p class='temperature'>Temperature: 20 <button id='up'>+</button><button id='down'>-</button></p>
+      <button id=reset>Reset</button><br>
       Power saving mode is <span id="power-saving-status">on</span><button id='power-saving'>Turn off power saving</button><br>
      <div class='usage'>Current energy usage: medium</div>
     </section>
