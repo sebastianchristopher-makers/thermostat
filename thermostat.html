@@ -3,6 +3,7 @@
   <head>
     <title>Thermostat</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
     <script src='src/Thermostat.js'></script>
     <script src='src/Interface.js'></script>
     <link rel="stylesheet" type="text/css" href="styles/style.css"></link>
@@ -10,11 +11,29 @@
   <body>
     <section>
       <h1>Thermostat</h1>
-      <p class='temperature'>Temperature: <span id=temperature>20</span> <button id='up'>+</button><button id='down'>-</button></p>
-      <button id=reset>Reset</button><br>
-      Power saving mode is <span id="power-saving-status">on</span>
-      <button id='power-saving-on'>Turn on power saving</button><button id='power-saving-off'>Turn off power saving</button><br>
-     <div class='usage'>Current energy usage: medium</div>
+      <p>The temperature in <span id=city></span> is <span id=city-temp></span> &#8451;</p>
+      <form id='select-city'>
+        Change city <input type='text' id='user-city'><input type='submit' value='Sumbit'>
+      </form>
+      <iframe
+        width='250px'
+        height='250px'
+        frameborder='0px'
+        id='map'
+        style='border: 0px'
+        src=''>
+      </iframe>
+      <p class='temperature'>Temperature: <span id=temperature></span> &#8451; <button id='up'>+</button><button id='down'>-</button></p>
+      Power saving mode is <span id="power-saving-status"></span>
+      <button id='switch-power-saving-mode'>Switch power saving mode</button><br>
+     <div class='usage'>Current energy usage: medium</div><br><br>
+     <button id=reset>Reset</button><br>
+    </section>
+    <section>
+      <img src='images/thermostat-clipart-10.jpg' alt='thermostat'>
     </section>
   </body>
+  <footer>
+    <a href="http://www.geoplugin.com/geolocation/" target="_new">IP Geolocation</a> by <a href="http://www.geoplugin.com/" target="_new">geoPlugin</a>
+  </footer>
 </html>

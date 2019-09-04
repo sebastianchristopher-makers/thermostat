@@ -29,6 +29,13 @@ class Thermostat {
       this.temperature = 25;
     }
   }
+  switchPowerSavingMode() {
+    if(this.powerSavingMode === false) {
+      this.turnPowerSavingOn();
+    } else {
+      this.turnPowerSavingOff();
+    }
+  }
   reset() {
     this.temperature = 20;
   }

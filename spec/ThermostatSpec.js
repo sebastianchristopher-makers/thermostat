@@ -35,6 +35,12 @@ describe('Thermostat', function() {
     }
     expect(() => {thermostat.up()}).toThrow('Thermostat is at its maximum temperature.');
   });
+  it('can switch the power saving mode', function() {
+    thermostat.switchPowerSavingMode();
+    expect(thermostat.powerSavingMode).toBe(false);
+    thermostat.switchPowerSavingMode();
+    expect(thermostat.powerSavingMode).toBe(true);
+  });
   it('can reset the temperature to 20', function() {
     thermostat.up();
     expect(thermostat.temperature).not.toEqual(20);

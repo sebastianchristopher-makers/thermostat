@@ -13,3 +13,21 @@ Working from [this repo](https://github.com/makersacademy/course/tree/master/the
 * You can reset the temperature to 20 with a reset function ✅
 * You can ask about the thermostat's current energy usage: < 18 is low-usage, < 25 is medium-usage, anything else is high-usage. (In the challenges where we add an interface, low-usage will be indicated with green, medium-usage indicated with black, high-usage indicated with red.) ✅
 ```
+## To use:
+I have put the googlemaps API key in the APIkeys.json file - this requires running from nodeJS http-server. To use, install:
+```
+npm install -g http-server
+```
+run:
+```
+http-server -c-1
+```
+visit:
+```
+http://localhost:8080/thermostat.html
+```
+Alternatively, hardcode the key in function getMap() (in Interface.js).
+
+## TODO:
+* Add css styling to improve user experience
+* Add persistence (sessions)

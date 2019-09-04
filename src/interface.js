@@ -1,5 +1,40 @@
 $(document).ready(function(){
+
+  function getTemp(city) {
+    let appID = '3ef30ee42752f76b1aaba43f31fbb4fb'
+    let url = 'http://api.openweathermap.org/data/2.5/'
+    let units = 'metric'
+    $.get(url + 'weather?q=' + city + '&APPID=' + appID + '&units=' + units)
+      .done(function(response) {
+        $('#city').text(response.name + ', ' + response.sys.country);
+        $('#city-temp').text(response.main.temp);
+      })
+      .fail(function(xhr, status, error) {
+        var errorMessage = xhr.status + ': ' + xhr.statusText + "\nThe city (" + city + ") you entered was not found."
+        alert('Error - ' + errorMessage);
+      })
+  }
+
+  function getMap(city) {
+    $.getJSON('APIkeys.json',function(data){
+      let mapKey = data[0].mapsKey;
+      $("#map").attr("src", 'https://www.google.com/maps/embed/v1/search?q=' + city + '&key=' + mapKey);
+    });
+  }
+
+  getTemp(geoplugin_city());
+  getMap(geoplugin_city());
+
+  $('#select-city').submit(function(event) {
+    event.preventDefault();
+    var city = $('#user-city').val();
+    getTemp(city);
+    getMap(city);
+  })
+
   let thermostat = new Thermostat();
+  $('#power-saving-status').text(powerSavingModeText());
+  $('#temperature').text(thermostat.temperature);
 
   function powerSavingModeText() {
     if(thermostat.powerSavingMode === true) {
@@ -26,13 +61,23 @@ $(document).ready(function(){
   }
 
   $('#up').click(function(){
-    thermostat.up();
+    try{
+      thermostat.up();
+    }
+    catch(err){
+      alert(err.toString());
+    }
     powerSavingCSS();
     $('#temperature').text(thermostat.temperature);
  });
 
   $('#down').click(function(){
-    thermostat.down();
+    try{
+      thermostat.down();
+    }
+    catch(err){
+      alert(err.toString());
+    }
     powerSavingCSS();
     $('#temperature').text(thermostat.temperature);
  });
@@ -43,14 +88,9 @@ $(document).ready(function(){
     $('#temperature').text(thermostat.temperature);
  });
 
-  $('#power-saving-on').click(function(){
-    thermostat.turnPowerSavingOn();
+  $('#switch-power-saving-mode').click(function(){
+    thermostat.switchPowerSavingMode();
     $('#power-saving-status').text(powerSavingModeText());
     $('#temperature').text(thermostat.temperature);
- });
-
-  $('#power-saving-off').click(function(){
-    thermostat.turnPowerSavingOff();
-    $('#power-saving-status').text(powerSavingModeText());
  });
 });
