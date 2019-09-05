@@ -29,6 +29,7 @@ http://localhost:8080/index.html
 Alternatively, hardcode the key in function getMap() (in Interface.js).
 
 ## TODO:
+* Add feature tests
 * Add css styling to improve user experience
 * Add persistence (sessions) ✅
 * Add persistence for power saving mode ✅
