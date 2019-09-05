@@ -31,7 +31,7 @@ Alternatively, hardcode the key in function getMap() (in Interface.js).
 ## TODO:
 * Add css styling to improve user experience
 * Add persistence (sessions) ✅
-* Add persistence for power saving mode
-* Big refactor
+* Add persistence for power saving mode ✅
+* Clean up and refactor
 * Handle cities with ambiguous countries (e.g. Manchester) (weather API)
 * Weather API and Maps API handle these differently - needs to be the same

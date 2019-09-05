@@ -1,12 +1,16 @@
 $(document).ready(function(){
-
+  // persistence handlers
   function setSessionTemperature(temperature){
     $.post('/sessions', { temperature: temperature } );
   }
   function setSessionCity(city){
     $.post('/sessions', { city: city } );
   }
+  function setSessionPowerSavingMode(powerSavingMode){
+    $.post('/sessions', { powerSavingMode: powerSavingMode } );
+  }
 
+  // api handlers
   function getTemp(city) {
     let appID = '3ef30ee42752f76b1aaba43f31fbb4fb'
     let url = 'http://api.openweathermap.org/data/2.5/'
@@ -16,7 +20,6 @@ $(document).ready(function(){
         $('#city').text(response.name + ', ' + response.sys.country);
         $('#city-temp').text(response.main.temp);
         setSessionCity(response.name);
-        // $.post('/sessions', { city: response.name } )
       })
       .fail(function(xhr, status, error) {
         var errorMessage = xhr.status + ': ' + xhr.statusText + "\nThe city (" + city + ") you entered was not found."
@@ -31,37 +34,7 @@ $(document).ready(function(){
     })
   }
 
-  $('#select-city').submit(function(event) {
-    event.preventDefault();
-    var city = $('#user-city').val();
-    getTemp(city);
-    getMap(city);
-  })
-
-  // run on load - checks for session[:city]
-  $.getJSON('/sessions',function(response){
-    let city = response.city
-    if(city === null){
-      getTemp(geoplugin_city());
-      getMap(geoplugin_city());
-    } else {
-      getTemp(city);
-      getMap(city);
-    }
-  })
-
-  let thermostat = new Thermostat();
-
-  $.getJSON('/sessions', function (response){
-    let sessionTemperature = response.temperature;
-    if(sessionTemperature !== null){
-      thermostat.setCurrentTemperature(sessionTemperature);
-    }
-    $('#temperature').text(thermostat.getCurrentTemperature());
-    $('#power-saving-status').text(powerSavingModeText());
-    powerSavingCSS();
-  })
-
+  // css handlers
   function powerSavingModeText() {
     if(thermostat.powerSavingMode === true) {
       return 'on';
@@ -85,6 +58,14 @@ $(document).ready(function(){
       $('.usage').css('color', 'black');
     }
   }
+
+  // button handlers
+  $('#select-city').submit(function(event) {
+    event.preventDefault();
+    var city = $('#user-city').val();
+    getTemp(city);
+    getMap(city);
+  })
 
   $('#up').click(function(){
     try{
@@ -119,8 +100,37 @@ $(document).ready(function(){
 
   $('#switch-power-saving-mode').click(function(){
     thermostat.switchPowerSavingMode();
+    setSessionPowerSavingMode(thermostat.powerSavingMode);
     $('#power-saving-status').text(powerSavingModeText());
     powerSavingCSS();
     $('#temperature').text(thermostat.getCurrentTemperature());
  });
+
+ // run on load
+ let thermostat = new Thermostat();
+
+ $.getJSON('/sessions', function (response){
+   let sessionTemperature = parseInt(response.temperature) || thermostat.getCurrentTemperature();
+   if(sessionTemperature !== null){
+     thermostat.setCurrentTemperature(sessionTemperature);
+   }
+   let sessionPowerSavingMode = response.powerSavingMode;
+   if(sessionPowerSavingMode !== null){
+     thermostat.powerSavingMode = (sessionPowerSavingMode == 'true');
+   }
+   $('#temperature').text(thermostat.getCurrentTemperature());
+   $('#power-saving-status').text(powerSavingModeText());
+   powerSavingCSS();
+ })
+
+ $.getJSON('/sessions',function(response){
+   let city = response.city
+   if(city === null){
+     getTemp(geoplugin_city());
+     getMap(geoplugin_city());
+   } else {
+     getTemp(city);
+     getMap(city);
+   }
+ })
 });

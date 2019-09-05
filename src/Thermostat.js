@@ -10,7 +10,7 @@ class Thermostat {
     this.temperature = degrees;
   }
   up() {
-    if(this.maxTemp()){
+    if(this.isMaxTemp()){
       throw 'Thermostat is at its maximum temperature.';
     } else {
       this.temperature ++;
@@ -23,8 +23,8 @@ class Thermostat {
       throw 'Thermostat is at its minimum temperature.';
     }
   }
-  maxTemp() {
-    return (this.temperature === 25 && this.powerSavingMode === true) || (this.temperature === 32 && this.powerSavingMode === false);
+  isMaxTemp() {
+    return (this.temperature === 25 && this.powerSavingMode === true) || (this.temperature === 32);
   }
   turnPowerSavingOff() {
     this.powerSavingMode = false;
