@@ -3,6 +3,12 @@ class Thermostat {
     this.temperature = 20;
     this.powerSavingMode = true;
   }
+  getCurrentTemperature(){
+    return this.temperature;
+  }
+  setCurrentTemperature(degrees){
+    this.temperature = degrees;
+  }
   up() {
     if(this.maxTemp()){
       throw 'Thermostat is at its maximum temperature.';

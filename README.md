@@ -24,10 +24,14 @@ http-server -c-1
 ```
 visit:
 ```
-http://localhost:8080/thermostat.html
+http://localhost:8080/index.html
 ```
 Alternatively, hardcode the key in function getMap() (in Interface.js).
 
 ## TODO:
 * Add css styling to improve user experience
-* Add persistence (sessions)
+* Add persistence (sessions) ✅
+* Add persistence for power saving mode
+* Big refactor
+* Handle cities with ambiguous countries (e.g. Manchester) (weather API)
+* Weather API and Maps API handle these differently - needs to be the same
